@@ -2,7 +2,7 @@
 
 For anyone picking up this project, including a coding agent in any IDE. It needs no earlier chat history.
 
-**Last updated:** 2026-11-05, during phase 2. Update this file at the end of every phase.
+**Last updated:** 2026-11-05, during phase 3. Update this file at the end of every phase.
 
 ## What this is
 
@@ -30,8 +30,8 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 | Phase | State |
 |---|---|
 | 1. Backend | **Done:** all endpoints, 53 passing tests, official benchmark passes, data survives restarts |
-| 2. Access and device setup | **In progress:** backend answers on the laptop's Wi-Fi address and the firewall allows Node. Still to do: invite teammate, test from a real phone, create the Expo app |
-| 3. Mobile foundation (F1) | Not started, `mobile/` does not exist yet |
+| 2. Access and device setup | **Done:** phone reaches the API over Wi-Fi, teammate has started |
+| 3. Mobile foundation (F1) | **In progress:** teammate is building it |
 | 4. Login and Home (F2, F3) | Not started |
 | 5. Shopping and checkout (F4) | Not started |
 | 6. Expenses, settle, add expense (F5, F6) | Not started |
@@ -40,7 +40,7 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 | 9. Surprise task at hour 3.5 | Not started, must wait for the announcement |
 | 10. Rehearsal and submission | Not started |
 
-**The next action is phase 2.** The detailed plan is below.
+**Teammate is on phase 3. Backend owner: prepare for the oral defense and support integration.** The detailed plan is below.
 
 ## Decisions that differ from what you might assume
 
