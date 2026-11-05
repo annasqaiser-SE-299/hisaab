@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home dashboard — Hisaab mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E7C6B}a:hover{color:#0A5F52}
+</style>
+<style>html{background:#DDE3E0} body{display:flex;justify-content:center}</style>
+</head>
+<body>
+<!-- Mockup 02-home: static reference for the React Native screen. 390x844 phone frame. -->
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F5F4; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #10201B; position: relative; overflow: hidden">
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 24px 16px 100px">
+
+    <header style="display: flex; align-items: center; justify-content: space-between; padding-top: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <div style="width: 44px; height: 44px; border-radius: 999px; background: #0E7C6B; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px">AY</div>
+        <div style="display: flex; flex-direction: column">
+          <span style="font-size: 13px; color: #5A6B65">Signed in as</span>
+          <span style="font-size: 18px; font-weight: 700">Ayesha</span>
+        </div>
+      </div>
+      <button type="button" style="height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #10201B; display: flex; align-items: center; gap: 6px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10201B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h12l-3-3M17 17H5l3 3"></path></svg>
+        Switch account
+      </button>
+    </header>
+
+    <section style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 14px; font-weight: 600; color: #5A6B65">November 2026 spending</span>
+        <button type="button" aria-label="Edit monthly budget" style="width: 44px; height: 44px; margin: -12px -12px -12px 0; border: none; background: transparent; display: flex; align-items: center; justify-content: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"></path></svg>
+        </button>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap">
+        <span style="font-size: 34px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums">PKR 4,200.00</span>
+        <span style="font-size: 14px; color: #5A6B65">of PKR 5,000.00</span>
+      </div>
+      <div style="height: 12px; border-radius: 999px; background: #EEF1EF; overflow: hidden">
+        <div style="width: 84%; height: 12px; border-radius: 999px; background: #D97706"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-size: 13px; font-weight: 700; color: #8A4307; background: #FDF1E2; border-radius: 999px; padding: 6px 12px">Near Limit · 84%</span>
+        <span style="font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums">PKR 800.00 left</span>
+      </div>
+    </section>
+
+    <section style="background: #FCEBEC; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <span style="font-size: 14px; font-weight: 600; color: #8E1A22">Your balance</span>
+      <span style="font-size: 26px; font-weight: 800; color: #B3212A; font-variant-numeric: tabular-nums">You owe PKR 450.00</span>
+      <span style="font-size: 14px; line-height: 20px; color: #6B1F25">Ali is owed PKR 250.00 · Bilal is owed PKR 200.00</span>
+      <button type="button" style="align-self: flex-start; height: 44px; padding: 0 18px; border-radius: 12px; border: none; background: #B3212A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700">Settle up</button>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E7C6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="17" cy="20" r="1.5"></circle></svg>
+        <span style="font-size: 26px; font-weight: 800">3</span>
+        <span style="font-size: 14px; color: #5A6B65">pending items</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E7C6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+        <span style="font-size: 26px; font-weight: 800">4</span>
+        <span style="font-size: 14px; color: #5A6B65">expenses this month</span>
+      </div>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-size: 16px; font-weight: 700">Recent activity</h2><a href="12-activity.html" style="font-size: 14px; font-weight: 700; text-decoration: none; padding: 12px 0">See all</a></div>
+      <div style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 16px; display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid #EEF1EF">
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Electricity Bill</span>
+            <span style="font-size: 13px; color: #5A6B65">Ali paid · split 3 ways</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">PKR 1,020.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px">
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Internet Bill</span>
+            <span style="font-size: 13px; color: #5A6B65">Bilal paid · custom split</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">PKR 1,500.00</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <nav aria-label="Main" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; background: #FFFFFF; border-top: 1px solid #E2E8E5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 8px 4px 20px">
+    <a href="02-home.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #0E7C6B; font-size: 12px; font-weight: 700">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E7C6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>
+      Home
+    </a>
+    <a href="03-shopping.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="17" cy="20" r="1.5"></circle></svg>
+      Shopping
+    </a>
+    <a href="05-expenses.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+      Expenses
+    </a>
+    <a href="12-activity.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      Activity
+    </a>
+  </nav>
+</div>
+</body>
+</html>

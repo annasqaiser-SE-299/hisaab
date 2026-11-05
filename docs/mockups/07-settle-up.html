@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settle up + error toast — Hisaab mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E7C6B}a:hover{color:#0A5F52}
+</style>
+<style>html{background:#DDE3E0} body{display:flex;justify-content:center}</style>
+</head>
+<body>
+<!-- Mockup 07-settle-up: static reference for the React Native screen. 390x844 phone frame. -->
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F5F4; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #10201B; position: relative; overflow: hidden">
+  <div style="padding: 40px 16px; display: flex; flex-direction: column; gap: 16px" aria-hidden="true">
+    <span style="font-size: 26px; font-weight: 800">Expenses</span>
+    <div style="height: 240px; border-radius: 20px; background: #FFFFFF"></div>
+  </div>
+  <div style="position: absolute; inset: 0; background: rgba(16, 32, 27, 0.45)"></div>
+
+  <div role="alert" style="position: absolute; top: 24px; left: 16px; right: 16px; background: #B3212A; color: #FFFFFF; border-radius: 14px; padding: 14px 16px; display: flex; gap: 10px; align-items: flex-start; box-shadow: 0 8px 24px rgba(16,32,27,0.25)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex-shrink: 0; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16v.5"></path></svg>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 15px; font-weight: 700">Settlement rejected</span>
+      <span style="font-size: 14px; line-height: 20px">Amount exceeds Ali's credit of PKR 250.00.</span>
+    </div>
+  </div>
+
+  <section role="dialog" aria-label="Settle up" style="position: absolute; left: 0; right: 0; bottom: 0; top: 200px; background: #FFFFFF; border-radius: 24px 24px 0 0; padding: 12px 20px 24px; display: flex; flex-direction: column; gap: 18px">
+    <div style="width: 40px; height: 5px; border-radius: 999px; background: #CBD5D1; align-self: center"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <h1 style="margin: 0; font-size: 22px; font-weight: 800">Settle up</h1>
+      <a href="05-expenses.html" aria-label="Close" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-right: -10px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+      </a>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; background: #F3F5F4; border-radius: 14px; padding: 14px 16px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-size: 13px; font-weight: 600; color: #5A6B65">From</span>
+        <span style="font-size: 16px; font-weight: 700">Ayesha (you)</span>
+      </div>
+      <span style="font-size: 14px; font-weight: 700; color: #B3212A">owes PKR 450.00</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 14px; font-weight: 600">Pay to</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px" role="radiogroup" aria-label="Pay to">
+        <button type="button" role="radio" aria-checked="true" style="height: 64px; border-radius: 14px; border: 2px solid #0E7C6B; background: #E3F3EF; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 0 14px; gap: 2px">
+          <span style="font-size: 15px; font-weight: 700; color: #10201B">Ali</span>
+          <span style="font-size: 13px; font-weight: 600; color: #12703A">owed PKR 250.00</span>
+        </button>
+        <button type="button" role="radio" aria-checked="false" style="height: 64px; border-radius: 14px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 0 14px; gap: 2px">
+          <span style="font-size: 15px; font-weight: 600; color: #10201B">Bilal</span>
+          <span style="font-size: 13px; font-weight: 600; color: #12703A">owed PKR 200.00</span>
+        </button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="amt" style="font-size: 14px; font-weight: 600">Amount</label>
+      <div style="display: flex; align-items: center; height: 56px; border-radius: 14px; border: 2px solid #B3212A; padding: 0 8px 0 16px; gap: 8px">
+        <span style="font-size: 16px; font-weight: 700; color: #5A6B65">PKR</span>
+        <input id="amt" value="300.00" inputmode="decimal" aria-invalid="true" aria-describedby="amt-err" style="flex: 1; border: none; outline: none; font-family: inherit; font-size: 22px; font-weight: 800; color: #10201B; width: 100%; min-width: 0">
+        <button type="button" style="height: 40px; padding: 0 12px; border-radius: 10px; border: none; background: #E3F3EF; color: #0A5F52; font-family: inherit; font-size: 13px; font-weight: 700">Use max</button>
+      </div>
+      <span id="amt-err" style="font-size: 13px; font-weight: 600; color: #B3212A">Max you can settle with Ali: PKR 250.00</span>
+    </div>
+
+    <button type="button" style="margin-top: auto; height: 56px; border-radius: 16px; border: none; background: #10201B; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 700">Record settlement</button>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activity feed — Hisaab mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E7C6B}a:hover{color:#0A5F52}
+</style>
+<style>html{background:#DDE3E0} body{display:flex;justify-content:center}</style>
+</head>
+<body>
+<!-- Mockup 12-activity: static reference for the React Native screen. 390x844 phone frame. -->
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F5F4; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #10201B; position: relative; overflow: hidden">
+  <div style="display: flex; flex-direction: column; gap: 16px; padding: 40px 16px 100px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em">Activity</h1>
+      <p style="margin: 0; font-size: 14px; color: #5A6B65">Every bill, checkout and payment in one timeline.</p>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A6B65; text-transform: uppercase; letter-spacing: 0.06em">Today</h2>
+      <div style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 16px; display: flex; flex-direction: column">
+        <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-bottom: 1px solid #EEF1EF">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #E6F4EA; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12703A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Ayesha paid Ali</span>
+            <span style="font-size: 13px; color: #5A6B65">Settlement · 2:14 PM</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; color: #12703A; font-variant-numeric: tabular-nums">250.00</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-bottom: 1px solid #EEF1EF">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #E3F3EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="17" cy="20" r="1.5"></circle></svg>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Ali checked out Milk, Rice</span>
+            <span style="font-size: 13px; color: #5A6B65">Groceries · split 3 ways · 11:40 AM</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">780.00</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #EEF1EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E4D48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Bilal added Internet Bill</span>
+            <span style="font-size: 13px; color: #5A6B65">Utilities · custom split · 9:12 AM</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">1,500.00</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 13px; font-weight: 700; color: #5A6B65; text-transform: uppercase; letter-spacing: 0.06em">Yesterday</h2>
+      <div style="background: #FFFFFF; border: 1px solid #E2E8E5; border-radius: 16px; display: flex; flex-direction: column">
+        <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-bottom: 1px solid #EEF1EF">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #EEF1EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E4D48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Ali added Electricity Bill</span>
+            <span style="font-size: 13px; color: #5A6B65">Utilities · split 3 ways · 8:05 PM</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">1,020.00</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #EEF1EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E4D48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Ayesha added Cleaning Supplies</span>
+            <span style="font-size: 13px; color: #5A6B65">Cleaning · split 2 ways · 6:30 PM</span>
+          </div>
+          <span style="font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums">900.00</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <nav aria-label="Main" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; background: #FFFFFF; border-top: 1px solid #E2E8E5; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 8px 4px 20px">
+    <a href="02-home.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>
+      Home
+    </a>
+    <a href="03-shopping.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="17" cy="20" r="1.5"></circle></svg>
+      Shopping
+    </a>
+    <a href="05-expenses.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5A6B65; font-size: 12px; font-weight: 600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5A6B65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M9 8h6M9 12h6"></path></svg>
+      Expenses
+    </a>
+    <a href="12-activity.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #0E7C6B; font-size: 12px; font-weight: 700">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E7C6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      Activity
+    </a>
+  </nav>
+</div>
+</body>
+</html>

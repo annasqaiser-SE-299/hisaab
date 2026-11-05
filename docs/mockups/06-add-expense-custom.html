@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add expense (custom split) — Hisaab mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0E7C6B}a:hover{color:#0A5F52}
+</style>
+<style>html{background:#DDE3E0} body{display:flex;justify-content:center}</style>
+</head>
+<body>
+<!-- Mockup 06-add-expense-custom: static reference for the React Native screen. 390x844 phone frame. -->
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #FFFFFF; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: #10201B; display: flex; flex-direction: column; padding: 28px 16px 24px; gap: 14px">
+  <div style="display: flex; align-items: center; gap: 4px">
+    <a href="05-expenses.html" aria-label="Back to expenses" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -10px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10201B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"></path></svg>
+    </a>
+    <h1 style="margin: 0; font-size: 22px; font-weight: 800">New expense</h1>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="t" style="font-size: 13px; font-weight: 600; color: #5A6B65">Title</label>
+    <input id="t" value="Internet Bill" style="height: 46px; border-radius: 12px; border: 1px solid #CBD5D1; padding: 0 14px; font-family: inherit; font-size: 16px; color: #10201B">
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <span style="font-size: 13px; font-weight: 600; color: #5A6B65">Category</span>
+    <div style="display: flex; flex-wrap: wrap; gap: 6px" role="radiogroup" aria-label="Category">
+      <button type="button" role="radio" aria-checked="false" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; color: #10201B">Groceries</button>
+      <button type="button" role="radio" aria-checked="true" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 2px solid #0E7C6B; background: #E3F3EF; font-family: inherit; font-size: 13px; font-weight: 700; color: #0A5F52">Utilities</button>
+      <button type="button" role="radio" aria-checked="false" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; color: #10201B">Cleaning</button>
+      <button type="button" role="radio" aria-checked="false" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; color: #10201B">Entertainment</button>
+      <button type="button" role="radio" aria-checked="false" style="height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; color: #10201B">Other</button>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="d" style="font-size: 13px; font-weight: 600; color: #5A6B65">Date</label>
+      <input id="d" value="05 Nov 2026" style="height: 46px; border-radius: 12px; border: 1px solid #CBD5D1; padding: 0 14px; font-family: inherit; font-size: 15px; color: #10201B; min-width: 0">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="a" style="font-size: 13px; font-weight: 600; color: #5A6B65">Amount (PKR)</label>
+      <input id="a" value="1,500.00" inputmode="decimal" style="height: 46px; border-radius: 12px; border: 1px solid #CBD5D1; padding: 0 14px; font-family: inherit; font-size: 15px; font-weight: 700; color: #10201B; min-width: 0">
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <span style="font-size: 13px; font-weight: 600; color: #5A6B65">Paid by</span>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px" role="radiogroup" aria-label="Paid by">
+      <button type="button" role="radio" aria-checked="false" style="height: 44px; border-radius: 12px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #10201B">Ali</button>
+      <button type="button" role="radio" aria-checked="false" style="height: 44px; border-radius: 12px; border: 1px solid #CBD5D1; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #10201B">Ayesha</button>
+      <button type="button" role="radio" aria-checked="true" style="height: 44px; border-radius: 12px; border: 2px solid #0E7C6B; background: #E3F3EF; font-family: inherit; font-size: 14px; font-weight: 700; color: #0A5F52">Bilal</button>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 13px; font-weight: 600; color: #5A6B65">Split</span>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); background: #EEF1EF; border-radius: 12px; padding: 4px" role="radiogroup" aria-label="Split strategy">
+      <button type="button" role="radio" aria-checked="false" style="height: 38px; border-radius: 9px; border: none; background: transparent; font-family: inherit; font-size: 14px; font-weight: 600; color: #5A6B65">Equal</button>
+      <button type="button" role="radio" aria-checked="true" style="height: 38px; border-radius: 9px; border: none; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 700; color: #10201B; box-shadow: 0 1px 3px rgba(16,32,27,0.15)">Custom</button>
+    </div>
+    <div style="border: 1px solid #E2E8E5; border-radius: 14px; display: flex; flex-direction: column">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 16px; border-bottom: 1px solid #EEF1EF">
+        <label for="c1" style="font-size: 15px; font-weight: 600">Ali</label>
+        <input id="c1" value="500.00" inputmode="decimal" style="width: 120px; height: 40px; border-radius: 10px; border: 1px solid #CBD5D1; padding: 0 12px; text-align: right; font-family: inherit; font-size: 15px; color: #10201B">
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 16px; border-bottom: 1px solid #EEF1EF">
+        <label for="c2" style="font-size: 15px; font-weight: 600">Ayesha</label>
+        <input id="c2" value="300.00" inputmode="decimal" style="width: 120px; height: 40px; border-radius: 10px; border: 1px solid #CBD5D1; padding: 0 12px; text-align: right; font-family: inherit; font-size: 15px; color: #10201B">
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 16px">
+        <label for="c3" style="font-size: 15px; font-weight: 600">Bilal</label>
+        <input id="c3" value="600.00" inputmode="decimal" style="width: 120px; height: 40px; border-radius: 10px; border: 1px solid #CBD5D1; padding: 0 12px; text-align: right; font-family: inherit; font-size: 15px; color: #10201B">
+      </div>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; background: #FDF1E2; border-radius: 12px; padding: 10px 14px">
+      <span style="font-size: 14px; font-weight: 600; color: #8A4307">Remaining to allocate</span>
+      <span style="font-size: 15px; font-weight: 800; color: #8A4307; font-variant-numeric: tabular-nums">PKR 100.00</span>
+    </div>
+  </div>
+
+  <button type="button" disabled style="margin-top: auto; height: 54px; border-radius: 16px; border: none; background: #E2E8E5; color: #5A6B65; font-family: inherit; font-size: 16px; font-weight: 700">Allocate PKR 100.00 more to save</button>
+</div>
+</body>
+</html>
