@@ -8,7 +8,7 @@ to see all 15 screens. Each prompt below names the mockup file(s) Claude Code mu
 
 From the repo root:
 ```bash
-npx create-expo-app@latest mobile        # default template = TypeScript + expo-router tabs
+npx create-expo-app@latest mobile        # answer Yes when asked to skip creating a git repository
 cd mobile
 npx expo install expo-secure-store expo-crypto expo-font @react-native-community/datetimepicker
 npx expo install @expo-google-fonts/plus-jakarta-sans
@@ -20,9 +20,13 @@ be on the same Wi-Fi. The backend is already built, so there is no mock mode.
 
 ## Folder structure (target)
 
+The current Expo template (SDK 58) keeps routes in `src/app/`. Wherever this guide says `app/...`, use
+`mobile/src/app/...`. The `@/` import alias points to `mobile/src/`. Delete the template's example screens and
+components rather than building on them.
+
 ```
 mobile/
-  app/
+  src/app/
     _layout.tsx               # fonts, AuthProvider, Toast, auth gate (no token → /login)
     login.tsx                 # mockup 01
     (tabs)/

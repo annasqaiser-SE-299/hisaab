@@ -2,7 +2,7 @@
 
 For anyone picking up this project, including a coding agent in any IDE. It needs no earlier chat history.
 
-**Last updated:** 2026-11-05, end of the backend phase. Update this file at the end of every phase.
+**Last updated:** 2026-11-05, during phase 2. Update this file at the end of every phase.
 
 ## What this is
 
@@ -30,7 +30,7 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 | Phase | State |
 |---|---|
 | 1. Backend | **Done:** all endpoints, 53 passing tests, official benchmark passes, data survives restarts |
-| 2. Access and device setup | **Not done:** teammate not yet invited, phone access untested |
+| 2. Access and device setup | **In progress:** backend answers on the laptop's Wi-Fi address and the firewall allows Node. Still to do: invite teammate, test from a real phone, create the Expo app |
 | 3. Mobile foundation (F1) | Not started, `mobile/` does not exist yet |
 | 4. Login and Home (F2, F3) | Not started |
 | 5. Shopping and checkout (F4) | Not started |
@@ -83,8 +83,9 @@ needs the laptop's LAN IP, never `localhost`.
 1. Invite the teammate to the repo.
 2. Teammate follows the setup section of `MOBILE_HANDOFF.md`.
 3. Open `http://<laptop-IP>:3000/api/health` in the phone's browser. Fix Wi-Fi or the firewall if it fails.
-4. Run `npx create-expo-app@latest mobile` from the repo root and open it in Expo Go. Check that Expo Go supports
-   the SDK, where the template puts `app/`, and that no nested `mobile/.git` was created.
+4. Run `npx create-expo-app@latest mobile` from the repo root, answering Yes to skip creating a git repository,
+   and open it in Expo Go. A trial run of the template showed SDK 58, routes in `src/app/` and no nested `.git`.
+   If devices can't see each other on the venue Wi-Fi, use the phone's hotspot.
 
 **Done when:** the template app runs on the phone and the phone can reach the API.
 

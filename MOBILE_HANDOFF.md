@@ -54,15 +54,30 @@ see `{"ok":true}`. If not, put both on the same Wi-Fi and allow Node through the
 Use `http://<that-IP>:3000` as `API_BASE_URL`, never `localhost`. Set it for whichever laptop runs the backend
 at demo time.
 
-**4. Start your agent** from the repo root with this prompt:
+If the phone can't reach the laptop on the venue Wi-Fi, the network may be blocking devices from seeing each other.
+Turn on the phone's hotspot, connect the laptop to it, and use the laptop's new IP.
 
-> Read MOBILE_HANDOFF.md, CLAUDE.md and docs/FRONTEND.md. Only change files in mobile/. Start with the Setup
-> section of FRONTEND.md, then Step F1, and propose a short plan first.
+**4. Create the app** from the repo root. Answer Yes when asked to skip creating a git repository:
+
+```bash
+npx create-expo-app@latest mobile
+cd mobile
+npx expo start
+```
+
+Scan the QR code with Expo Go. If Expo Go says the project needs a newer SDK, update Expo Go from the app store.
+
+**5. Start your agent** from the repo root with this prompt:
+
+> Read MOBILE_HANDOFF.md, CLAUDE.md and docs/FRONTEND.md. Only change files in mobile/. The Expo app already
+> exists in mobile/. Finish the package installs in the Setup section of FRONTEND.md, then do Step F1, and propose
+> a short plan first.
 
 ## Where the docs have changed
 
 `docs/FRONTEND.md` and `CLAUDE.md` already include these. They are listed so you don't build from an older copy.
 
+- **Routes live in `mobile/src/app/`.** The current Expo template uses that instead of `mobile/app/`.
 - **No mock mode.** The real API is ready, so skip `USE_MOCK` and `mock.ts`.
 - **Member switching.** Home has Ali / Ayesha / Bilal chips. Tapping one signs in as that member using `pass1234`,
   with no login screen in between. The brief requires an active member selector, so this one earns marks.
