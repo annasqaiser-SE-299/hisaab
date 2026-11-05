@@ -1,0 +1,8 @@
+#!/bin/sh
+# Turned on only in the mobile developer's clone (see MOBILE_HANDOFF.md).
+if git diff --cached --name-only | grep -q '^backend/'; then
+  echo "Commit refused: this clone must not change backend/."
+  echo "Unstage it with: git restore --staged backend"
+  echo "Then ask the backend owner for the change."
+  exit 1
+fi

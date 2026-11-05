@@ -5,6 +5,7 @@ debt settlement, monthly budget, activity feed. Built for the RC3 Mobile App Dev
 
 - **Backend:** Node.js + Express + SQLite (`backend/`)
 - **Mobile:** Expo React Native + TypeScript (`mobile/`)
+- **Building mobile?** Start with `MOBILE_HANDOFF.md`.
 - **Spec:** `CLAUDE.md` (read first) · `docs/BACKEND.md` · `docs/FRONTEND.md` · `docs/DEMO.md`
 - **Mockups:** open `docs/mockups/index.html` in a browser
 
@@ -32,10 +33,10 @@ Logins: `ali` / `ayesha` / `bilal`, password `pass1234`.
 | Time | Backend (A) | Mobile (B) |
 |---|---|---|
 | 0:00–0:15 | Repo + setup, B1 starts | Expo project on phone, F1 starts |
-| 0:15–1:00 | B1 DB + auth, B2 split engine | F1 foundation (mock data) |
+| 0:15–1:00 | B1 DB + auth, B2 split engine | F1 foundation |
 | 1:00–2:00 | B3 shopping/checkout, B4 expenses + guards | F2 login, F3 home, F4 shopping |
 | 2:00–2:45 | B5 balances/settle/budget/activity, B6 benchmark test | F5 expenses + settle, F6 add expense |
-| 2:45–3:30 | B7 hardening, help integrate | F7 activity, switch off mock, F8 polish |
+| 2:45–3:30 | B7 hardening, help integrate | F7 activity, F8 polish |
 | 3:30 | **Tag v1-stable** — full demo run on the phone | |
 | 3:30–4:30 | Surprise task (backend prompt) | Surprise task (mobile prompt) |
 | 4:30–5:00 | Rehearse demo + code defense, final push | Rehearse demo + code defense, final push |

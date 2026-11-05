@@ -16,7 +16,7 @@ npm i react-native-toast-message
 npx expo start                           # scan the QR code with Expo Go on the phone
 ```
 Find the laptop's LAN IP (`ipconfig` on Windows → IPv4) and put it in `src/config.ts`. Phone and laptop must
-be on the same Wi-Fi. Until the backend is ready, use `USE_MOCK = true` (see F1).
+be on the same Wi-Fi. The backend is already built, so there is no mock mode.
 
 ## Folder structure (target)
 
@@ -34,13 +34,12 @@ mobile/
     expense/new.tsx           # mockups 06 + 09 (+10 duplicate dialog)
     smart-settle.tsx          # mockup 08 — ONLY if surprise Option 1 is announced
   src/
-    config.ts                 # API_BASE_URL, USE_MOCK
+    config.ts                 # API_BASE_URL
     theme.ts                  # colours, spacing, radius, font names (tokens below)
     api/
       client.ts               # request(): base URL, Bearer token, JSON, ApiError, NETWORK_ERROR, 401 handler
       endpoints.ts            # typed functions: login, getMembers, getShopping, checkout, createExpense, ...
       types.ts                # Item, Expense, Balance, Budget, Settlement, Activity (match CLAUDE.md exactly)
-      mock.ts                 # benchmark fixtures for USE_MOCK
     context/AuthContext.tsx   # token + member, login(), logout(), restore from SecureStore on start
     hooks/
       useApiQuery.ts          # { data, loading, error, refetch } + refetch on screen focus
@@ -110,12 +109,12 @@ Mockup data is the benchmark seen by **Ayesha**. Real screens use live API data.
 ## Step F1 — Foundation (≈ 40 min)
 
 > Read CLAUDE.md and docs/FRONTEND.md. In `mobile/` (fresh create-expo-app project), delete the template's
-> example screens/components and build the foundation: `src/config.ts` (API_BASE_URL, USE_MOCK),
+> example screens/components and build the foundation: `src/config.ts` (API_BASE_URL),
 > `src/theme.ts` with the exact tokens from FRONTEND.md, `src/api/types.ts` matching CLAUDE.md section 5 shapes
 > exactly, `src/api/client.ts` (Bearer token from AuthContext, JSON parse, throws ApiError {status, code,
 > message, details}; fetch failure → code NETWORK_ERROR message "Can't reach server. Check Wi-Fi."; 401 → calls
 > the registered logout handler), `src/api/endpoints.ts` with a typed function for every endpoint in CLAUDE.md
-> 5.1–5.7, `src/api/mock.ts` returning benchmark data (CLAUDE.md section 6) when USE_MOCK is true,
+> 5.1–5.7,
 > `AuthContext` (SecureStore persistence), `useApiQuery` (refetch on focus + pull-to-refresh support) and
 > `useSubmit` (in-flight lock, Idempotency-Key via expo-crypto randomUUID — reused only when retrying
 > after a NETWORK_ERROR, new after any server response — error toast with
@@ -135,11 +134,12 @@ Commit: `feat(mobile): foundation, api client, theme, components`
 ## Step F3 — Home (≈ 30 min)
 
 > Build `app/(tabs)/index.tsx` from docs/mockups/02-home.html: header with initials avatar, "Signed in as" name
-> and a Switch account button (logout → /login); budget card (GET /budget: month label, spent, budget,
+> and Ali / Ayesha / Bilal chips (tapping another member calls login with the seeded password `pass1234` and
+> swaps the token, with no login screen) plus a small Sign out button (logout → /login); budget card (GET /budget: month label, spent, budget,
 > progress bar coloured by status, status badge with percent, remaining — show "Over budget by PKR X" when
 > negative); balance card for the logged-in member from GET /balances (red "You owe", green "You are owed",
 > neutral "You're all settled up", plus who-is-owed line and a Settle up button that opens the SettleUpSheet);
-> pending items and month-expense count tiles; Recent activity (first 3 of GET /activity) with "See all" →
+> pending items and month-expense count tiles; Recent activity (first 3 of GET /activity, using `payer_name` for "Ali paid") with "See all" →
 > Activity tab. Pencil button opens BudgetSheet (docs/mockups/13-budget-edit.html: amount field, live preview
 > of percent/status/remaining, PUT /budget). Skeleton while loading (docs/mockups/15-states.html), pull-to-refresh.
 
@@ -176,7 +176,7 @@ Commit: `feat(mobile): foundation, api client, theme, components`
 > input per member and a "Remaining to allocate PKR X" bar; Save is disabled with the text "Allocate PKR X
 > more to save" until remaining is exactly 0.00 (compare in paisa). Save via useSubmit → POST /expenses. On 409
 > DUPLICATE_SUSPECTED show DuplicateDialog (docs/mockups/10-duplicate-warning.html) with the existing
-> expense's details: "Don't save, view existing" goes back; "Save anyway" re-sends the same body
+> expense's details (`created_by_name` for "X already logged", `payer_name` for "X paid"): "Don't save, view existing" goes back; "Save anyway" re-sends the same body
 > with confirm_duplicate: true and a new Idempotency-Key.
 
 ## Step F7 — Activity (≈ 15 min)
@@ -193,7 +193,7 @@ Commit: `feat(mobile): foundation, api client, theme, components`
 > spinner while in flight, success and error toasts, 401 → login. Check spacing, font weights, PKR formatting
 > and colours against the mockups. Make sure there are no console warnings (keys, missing deps).
 
-**Check (with real backend, USE_MOCK = false):** run the demo flow in docs/DEMO.md on the phone. Then stop the
+**Check (with real backend):** run the demo flow in docs/DEMO.md on the phone. Then stop the
 backend and confirm the offline banner + toast appear, restart it and pull to refresh.
 Commit + `git tag v1-mobile`.
 

@@ -10,6 +10,8 @@ Other docs: `docs/BACKEND.md` (backend build steps), `docs/FRONTEND.md` (mobile 
 **Everything in this file is FINAL. Do not change the stack, schema, endpoints, field names or rules without
 asking the user first — the other developer is building against them.**
 
+**Folder ownership:** an agent working on mobile must read `MOBILE_HANDOFF.md` first and must never change anything in `backend/`.
+
 ---
 
 ## 1. Tech stack
@@ -34,7 +36,7 @@ Phone runs the app in **Expo Go**. API base URL = laptop LAN IP (e.g. `http://19
 |---|---|
 | Household | One household, 3 seeded accounts. No sign-up screen. |
 | Auth | Username + password → JWT (7 days). Seeded logins `ali` / `ayesha` / `bilal`, password `pass1234`. |
-| Member selector | Replaced by "Signed in as X" + **Switch account** (logs out → login screen). |
+| Member selector | Login screen, plus Ali / Ayesha / Bilal chips on Home. Tapping a chip signs in as that member in one tap (seeded password, a demo shortcut), so the active member is always the logged-in member. |
 | Ownership rules | Settle: sender must be the logged-in user. Delete expense / shopping item: only its creator. Payer of an expense or checkout can be anyone. |
 | Money | Stored as integer **paisa**. API sends/receives **rupees as numbers with ≤ 2 decimals**. |
 | Balances | All-time (debts carry across months). |
@@ -64,10 +66,11 @@ Phone runs the app in **Expo Go**. API base URL = laptop LAN IP (e.g. `http://19
 - **Custom split**: every listed member exists, no duplicates, each share ≥ 0 with ≤ 2 decimals, and the shares
   sum **exactly** to the amount (compare in paisa). Members with 0 may be omitted.
 - **Net balance** (`services/balances.js → computeBalances()` — the single source of truth):
-  `net = paid − shareOwed + settlementsReceived − settlementsSent`. The sum over all members is always 0.
+  `net = paid − shareOwed + settlementsSent − settlementsReceived`. The sum over all members is always 0.
+  The brief prints the last two signs swapped, which contradicts its own benchmark (Ayesha −450 pays Ali 250 must give −200, not −700), so we follow the benchmark.
 - **Settlement validation** (`POST /api/settle`), in this order, each with a clear message:
-  1. amount > 0 with ≤ 2 decimals
-  2. recipient exists
+  1. amount > 0 with ≤ 2 decimals (400 `VALIDATION_ERROR`)
+  2. recipient exists (404 `NOT_FOUND`)
   3. `sender_id` equals the logged-in member (403 `SENDER_MUST_BE_YOU`)
   4. sender ≠ recipient ("You can't pay yourself.")
   5. sender net < 0 ("You don't owe anything right now.")
@@ -237,7 +240,7 @@ created_by_name, created_at, splits: [{ member_id, name, amount }] }`
 **Duplicate guard:** for manual expenses, if an expense exists with the same `payer_id`, same `amount`, the
 same normalised title (trimmed, lower-case, single spaces) and `created_at` within the last 24 hours, and
 `confirm_duplicate` is not `true` → 409 `DUPLICATE_SUSPECTED` with
-`details: { duplicate: { id, title, amount, payer_name, created_at } }`. The app shows a dialog; "Save anyway"
+`details: { duplicate: { id, title, amount, payer_name, created_by_name, created_at } }`. The app shows a dialog; "Save anyway"
 re-sends the same body with `confirm_duplicate: true`.
 
 **Delete:** creator only. If `source = checkout`, its items go back to `pending` with `expense_id = NULL`
@@ -263,7 +266,7 @@ re-sends the same body with `confirm_duplicate: true`.
 |---|---|---|
 
 `Activity = { id: "expense-12" | "settlement-3", type: "expense" | "checkout" | "settlement", title, amount,
-actor_id, actor_name, counterparty_name (settlements only, else null), category (null for settlements),
+actor_id, actor_name, payer_name (null for settlements), counterparty_name (settlements only, else null), category (null for settlements),
 split_type, split_count, created_at }` — `actor` = creator for expenses/checkouts, sender for settlements.
 The app formats the text ("Ayesha paid Ali", "Ali checked out Milk, Rice", "Bilal added Internet Bill").
 
