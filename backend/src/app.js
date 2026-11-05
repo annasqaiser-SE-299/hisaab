@@ -15,6 +15,8 @@ app.use('/api/auth', require('./routes/auth'));
 // Everything below needs a valid token
 app.use('/api', requireAuth);
 app.use('/api/members', require('./routes/members'));
+app.use('/api/shopping', require('./routes/shopping'));
+app.use('/api/expenses', require('./routes/expenses'));
 
 app.use(notFound);
 app.use(errorHandler);
