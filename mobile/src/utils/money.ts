@@ -34,3 +34,4 @@ export function parseAmount(text: string): number {
   const parsed = parseFloat(clean);
   return isNaN(parsed) ? 0 : parsed;
 }
+

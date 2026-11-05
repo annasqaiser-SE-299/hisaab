@@ -94,3 +94,4 @@ export function useSubmit<TArgs = any, TResult = any>(
     resetError: () => setError(null),
   };
 }
+

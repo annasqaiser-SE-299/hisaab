@@ -119,3 +119,4 @@ export const api = {
       params: { seed },
     }),
 };
+

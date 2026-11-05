@@ -57,3 +57,4 @@ export function useApiQuery<T>(queryFn: () => Promise<T>, options: { enabled?: b
     setData,
   };
 }
+

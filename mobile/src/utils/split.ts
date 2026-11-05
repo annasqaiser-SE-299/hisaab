@@ -34,3 +34,4 @@ export function equalSplitPreview(
 
   return { splits, remainderPaisa: remainder };
 }
+
