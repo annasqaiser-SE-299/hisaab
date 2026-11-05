@@ -9,8 +9,8 @@ const { toRupees } = require('./money');
 // Positive net means the member is owed money. Paying a debt moves the sender toward 0,
 // so `sent` is added. Receiving money moves the recipient toward 0, so `received` is
 // subtracted. The brief's benchmark requires this: Ayesha (-450) pays Ali (+250) 250,
-// giving Ayesha -200 and Ali 0. The formula printed in the brief and CLAUDE.md has
-// these two signs swapped, which would give -700 and +500.
+// giving Ayesha -200 and Ali 0. The formula printed in the brief has these two signs
+// swapped, which would give -700 and +500.
 //
 // The sum over all members is always 0. Every expense adds its amount to the payer's
 // `paid` and the same amount across everyone's `share`. Every settlement adds the

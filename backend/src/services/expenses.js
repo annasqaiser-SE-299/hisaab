@@ -130,6 +130,7 @@ function createExpense(createdBy, { title, category, amountPaisa, payerId, date,
           title: duplicate.title,
           amount: toRupees(duplicate.amount_paisa),
           payer_name: duplicate.payer_name,
+          created_by_name: duplicate.created_by_name,
           created_at: duplicate.created_at,
         },
       });

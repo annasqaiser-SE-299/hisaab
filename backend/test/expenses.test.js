@@ -227,6 +227,7 @@ test('duplicate guard: warns on a normalised title match unless confirmed', asyn
   assert.equal(dup.body.error.details.duplicate.id, first.body.id);
   assert.equal(dup.body.error.details.duplicate.payer_name, 'Bilal');
   assert.equal(dup.body.error.details.duplicate.amount, 1500);
+  assert.equal(dup.body.error.details.duplicate.created_by_name, 'Bilal');
 
   const otherPayer = await request(app).post('/api/expenses').set(await as('bilal')).send({ ...body, payer_id: 'M01' });
   assert.equal(otherPayer.status, 201);

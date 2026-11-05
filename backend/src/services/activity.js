@@ -8,15 +8,17 @@ function listActivity(limit = 50) {
   const rows = db
     .prepare(
       `SELECT e.id AS row_id, 1 AS kind_rank, e.source, e.title, e.amount_paisa,
-              e.created_by AS actor_id, actor.name AS actor_name, NULL AS counterparty_name,
+              e.created_by AS actor_id, actor.name AS actor_name, payer.name AS payer_name,
+              NULL AS counterparty_name,
               e.category, e.split_type,
               (SELECT COUNT(*) FROM expense_splits s WHERE s.expense_id = e.id) AS split_count,
               e.created_at
        FROM expenses e
        JOIN members actor ON actor.id = e.created_by
+       JOIN members payer ON payer.id = e.payer_id
        UNION ALL
        SELECT s.id, 0, 'settlement', actor.name || ' paid ' || other.name, s.amount_paisa,
-              s.sender_id, actor.name, other.name,
+              s.sender_id, actor.name, NULL, other.name,
               NULL, NULL, NULL,
               s.created_at
        FROM settlements s
@@ -34,6 +36,7 @@ function listActivity(limit = 50) {
     amount: toRupees(r.amount_paisa),
     actor_id: r.actor_id,
     actor_name: r.actor_name,
+    payer_name: r.payer_name,
     counterparty_name: r.counterparty_name,
     category: r.category,
     split_type: r.split_type,

@@ -127,7 +127,9 @@ test('activity merges all types newest first with the exact shape', async () => 
   assert.equal(settlement.counterparty_name, 'Ali');
   assert.equal(settlement.category, null);
   assert.equal(settlement.amount, 250);
+  assert.equal(settlement.payer_name, null);
 
+  assert.equal(internet.payer_name, 'Bilal');
   assert.equal(electricity.counterparty_name, null);
   assert.equal(electricity.split_count, 3);
   assert.equal(internet.split_type, 'custom');
@@ -137,7 +139,7 @@ test('activity merges all types newest first with the exact shape', async () => 
 
   assert.deepEqual(Object.keys(checkout).sort(), [
     'actor_id', 'actor_name', 'amount', 'category', 'counterparty_name', 'created_at',
-    'id', 'split_count', 'split_type', 'title', 'type',
+    'id', 'payer_name', 'split_count', 'split_type', 'title', 'type',
   ]);
 
   const limited = await request(app).get('/api/activity?limit=2').set(await as('ali'));
