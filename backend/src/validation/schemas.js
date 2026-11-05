@@ -72,6 +72,29 @@ const createExpense = z.object({
   confirm_duplicate: z.boolean().optional(),
 });
 
+const settle = z.object({
+  sender_id: memberId('Sender'),
+  recipient_id: memberId('Recipient'),
+  amount: money('Amount'),
+});
+
+const budgetQuery = z.object({ month });
+
+const updateBudget = z.object({ amount: money('Budget') });
+
+const activityQuery = z.object({
+  limit: z.coerce
+    .number({ error: 'Limit must be a number.' })
+    .int('Limit must be a whole number.')
+    .min(1, 'Limit must be at least 1.')
+    .max(200, 'Limit can be at most 200.')
+    .default(50),
+});
+
+const devResetQuery = z.object({
+  seed: z.enum(['benchmark'], { error: 'The only seed available is benchmark.' }).optional(),
+});
+
 module.exports = {
   idParams,
   login,
@@ -80,7 +103,9 @@ module.exports = {
   checkout,
   expensesQuery,
   createExpense,
-  month,
-  money,
-  memberId,
+  settle,
+  budgetQuery,
+  updateBudget,
+  activityQuery,
+  devResetQuery,
 };
