@@ -20,6 +20,17 @@ If the phone can't connect, allow Node through Windows Firewall on private netwo
 
 Logins: `ali`, `ayesha`, `bilal`, all with password `pass1234`.
 
+## Try the API in a browser
+
+With the server running, open `http://localhost:3000/api/docs` (not available in production):
+
+1. Run `POST /dev/reset` with `seed=benchmark` for clean demo data.
+2. Run `POST /auth/login` and copy the token from the response.
+3. Click **Authorize** and paste the token.
+4. Open any endpoint, click **Try it out**, then **Execute**.
+
+The page is built from `src/openapi.js`, so update that file when an endpoint changes.
+
 ## Endpoints
 
 All paths start with `/api`. Everything except health, login and dev needs

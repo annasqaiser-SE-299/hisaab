@@ -29,7 +29,7 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 
 | Phase | State |
 |---|---|
-| 1. Backend | **Done:** all endpoints, 53 passing tests, official benchmark passes, data survives restarts |
+| 1. Backend | **Done:** all endpoints, 56 passing tests, official benchmark passes, data survives restarts, Swagger page at `/api/docs` |
 | 2. Access and device setup | **Done:** phone reaches the API over Wi-Fi, teammate has started |
 | 3. Mobile foundation (F1) | **In progress:** teammate is building it |
 | 4. Login and Home (F2, F3) | Not started |

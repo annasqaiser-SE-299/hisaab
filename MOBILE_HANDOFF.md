@@ -73,6 +73,9 @@ Scan the QR code with Expo Go. If Expo Go says the project needs a newer SDK, up
 > exists in mobile/. Finish the package installs in the Setup section of FRONTEND.md, then do Step F1, and propose
 > a short plan first.
 
+If the backend ever fails with "Cannot find module" after a pull, run `npm ci` in `backend/`. The API docs page is at
+`http://localhost:3000/api/docs`.
+
 ## Where the docs have changed
 
 `docs/FRONTEND.md` and `CLAUDE.md` already include these. They are listed so you don't build from an older copy.

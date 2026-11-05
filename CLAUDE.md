@@ -18,7 +18,7 @@ asking the user first — the other developer is building against them.**
 
 **Backend** (`backend/`): Node.js 22+, Express 4, JavaScript (CommonJS), `better-sqlite3` (DB file
 `backend/data/app.db`), `zod` (validation), `jsonwebtoken` + `bcryptjs` (auth), `cors`, `dotenv`.
-Dev: `nodemon`. Tests: built-in `node:test` + `supertest`.
+API docs page: `swagger-ui-express`. Dev: `nodemon`. Tests: built-in `node:test` + `supertest`.
 
 **Mobile** (`mobile/`): Expo (latest SDK), React Native, TypeScript, `expo-router` (tabs template),
 `expo-secure-store` (token), `react-native-toast-message`, `expo-crypto` (`randomUUID` for idempotency keys),

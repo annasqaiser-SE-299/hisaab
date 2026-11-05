@@ -1,5 +1,8 @@
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const openapi = require('./openapi');
+const { isProduction } = require('./config');
 const requireAuth = require('./middleware/auth');
 const { notFound, errorHandler } = require('./middleware/errors');
 
@@ -12,6 +15,13 @@ app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/dev', require('./routes/dev'));
+if (!isProduction) {
+  app.use(
+    '/api/docs',
+    swaggerUi.serve,
+    swaggerUi.setup(openapi, { swaggerOptions: { persistAuthorization: true } })
+  );
+}
 
 // Everything below needs a valid token
 app.use('/api', requireAuth);
