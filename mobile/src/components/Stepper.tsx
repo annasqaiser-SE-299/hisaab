@@ -28,6 +28,8 @@ export const Stepper: React.FC<StepperProps> = ({
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={handleDecrement}
+        accessibilityRole="button"
+        accessibilityLabel="Decrease quantity"
         disabled={value <= min}
         style={[styles.btn, value <= min && styles.btnDisabled]}
       >
@@ -37,6 +39,8 @@ export const Stepper: React.FC<StepperProps> = ({
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={handleIncrement}
+        accessibilityRole="button"
+        accessibilityLabel="Increase quantity"
         disabled={value >= max}
         style={[styles.btn, value >= max && styles.btnDisabled]}
       >

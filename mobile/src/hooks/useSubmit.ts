@@ -3,6 +3,8 @@ import * as Crypto from 'expo-crypto';
 import Toast from 'react-native-toast-message';
 import { ApiError } from '../api/client';
 
+const SUCCESS_TOAST_DELAY_MS = 350;
+
 export interface UseSubmitOptions<TResult> {
   successMessage?: string | ((result: TResult) => string);
   onSuccess?: (result: TResult) => void;
@@ -18,10 +20,13 @@ export function useSubmit<TArgs = any, TResult = any>(
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
   const currentKeyRef = useRef<string | null>(null);
+  // A ref, not state: two taps in the same frame both see the old state value.
+  const inFlightRef = useRef(false);
 
   const submit = useCallback(
     async (args: TArgs): Promise<TResult | null> => {
-      if (isSubmitting) return null;
+      if (inFlightRef.current) return null;
+      inFlightRef.current = true;
 
       setIsSubmitting(true);
       setError(null);
@@ -37,16 +42,20 @@ export function useSubmit<TArgs = any, TResult = any>(
 
         // After success, clear the key so next submission generates a fresh UUID
         currentKeyRef.current = null;
+        inFlightRef.current = false;
         setIsSubmitting(false);
 
         if (successMessage) {
           const msg = typeof successMessage === 'function' ? successMessage(result) : successMessage;
-          Toast.show({
-            type: 'success',
-            text1: msg,
-            position: 'top',
-            visibilityTime: 3000,
-          });
+          // Wait for a sheet that closes on success to go away, or the toast would close with it.
+          setTimeout(() => {
+            Toast.show({
+              type: 'success',
+              text1: msg,
+              position: 'top',
+              visibilityTime: 3000,
+            });
+          }, SUCCESS_TOAST_DELAY_MS);
         }
 
         if (onSuccess) {
@@ -55,6 +64,7 @@ export function useSubmit<TArgs = any, TResult = any>(
 
         return result;
       } catch (err: any) {
+        inFlightRef.current = false;
         setIsSubmitting(false);
         const apiError =
           err instanceof ApiError
@@ -81,10 +91,10 @@ export function useSubmit<TArgs = any, TResult = any>(
           onError(apiError);
         }
 
-        throw apiError;
+        return null;
       }
     },
-    [isSubmitting, submitFn, successMessage, onSuccess, onError, showErrorToast]
+    [submitFn, successMessage, onSuccess, onError, showErrorToast]
   );
 
   return {

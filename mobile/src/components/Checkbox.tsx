@@ -21,6 +21,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       activeOpacity={0.7}
       disabled={disabled}
       onPress={() => onToggle(!checked)}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked, disabled }}
       style={[
         styles.box,
         checked ? styles.checked : styles.unchecked,

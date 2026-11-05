@@ -15,6 +15,8 @@ export class ApiError extends Error {
   }
 }
 
+const REQUEST_TIMEOUT_MS = 10000;
+
 let currentToken: string | null = null;
 let onUnauthorizedCallback: (() => void) | null = null;
 
@@ -68,16 +70,23 @@ export async function request<T = any>(endpoint: string, options: RequestOptions
     headers['Idempotency-Key'] = options.idempotencyKey;
   }
 
+  // Without a timeout, an unreachable laptop leaves the spinner running for a long time.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
   let response: Response;
   try {
     response = await fetch(url, {
       ...options,
       headers,
+      signal: controller.signal,
     });
   } catch (err: any) {
     throw new ApiError(0, 'NETWORK_ERROR', "Can't reach server. Check Wi-Fi.", {
       originalError: err?.message,
     });
+  } finally {
+    clearTimeout(timeout);
   }
 
   if (response.status === 401) {

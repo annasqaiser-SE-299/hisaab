@@ -5,10 +5,10 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-  SafeAreaView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, fonts, radius } from '../../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../../api/endpoints';
 import { useApiQuery } from '../../hooks/useApiQuery';
 import { EmptyState } from '../../components/EmptyState';
@@ -95,7 +95,7 @@ export default function ActivityScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       {error && error.code === 'NETWORK_ERROR' && (
         <OfflineBanner onRetry={refetch} />
       )}

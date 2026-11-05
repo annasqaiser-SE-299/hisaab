@@ -5,7 +5,7 @@ import { colors, fonts, radius } from '../../theme';
 import { ProgressBar } from '../ProgressBar';
 import { StatusTag } from '../StatusTag';
 import { PrimaryButton } from '../PrimaryButton';
-import { formatPKR, parseAmount } from '../../utils/money';
+import { formatPKR, parseAmount, toPaisa } from '../../utils/money';
 import { formatMonthFull } from '../../utils/dates';
 import { api } from '../../api/endpoints';
 import { useSubmit } from '../../hooks/useSubmit';
@@ -37,12 +37,18 @@ export const BudgetSheet: React.FC<BudgetSheetProps> = ({
   }, [visible, currentBudget]);
 
   const parsedAmount = parseAmount(amountStr);
-  const percentUsed = parsedAmount > 0 ? (spent / parsedAmount) * 100 : 0;
-  const roundedPercent = Math.round(percentUsed * 10) / 10;
+  // Same rules as the server: compare whole paisa, so 74.96% can't round up into Near Limit.
+  const spentPaisa = toPaisa(spent);
+  const budgetPaisa = toPaisa(parsedAmount);
+  const roundedPercent = budgetPaisa > 0 ? Math.round((spentPaisa * 1000) / budgetPaisa) / 10 : 0;
   const remaining = parsedAmount - spent;
 
   const status: 'On Track' | 'Near Limit' | 'Over Budget' =
-    roundedPercent < 75 ? 'On Track' : roundedPercent < 100 ? 'Near Limit' : 'Over Budget';
+    spentPaisa * 100 < budgetPaisa * 75
+      ? 'On Track'
+      : spentPaisa < budgetPaisa
+      ? 'Near Limit'
+      : 'Over Budget';
 
   const { submit, isSubmitting } = useSubmit(
     async (amount: number) => {
@@ -95,7 +101,7 @@ export const BudgetSheet: React.FC<BudgetSheetProps> = ({
 
           <View style={styles.previewRow}>
             <StatusTag
-              label={`${status} · ${roundedPercent.toFixed(0)}%`}
+              label={`${status} · ${roundedPercent}%`}
               variant={
                 status === 'On Track'
                   ? 'onTrack'

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import Toast, { BaseToast, ErrorToast, ToastConfig } from 'react-native-toast-message';
 import {
   useFonts,
   PlusJakartaSans_400Regular,
@@ -12,54 +11,8 @@ import {
   PlusJakartaSans_800ExtraBold,
 } from '@expo-google-fonts/plus-jakarta-sans';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import { colors, fonts } from '../theme';
-
-const toastConfig: ToastConfig = {
-  success: (props) => (
-    <BaseToast
-      {...props}
-      style={{
-        borderLeftColor: colors.owed,
-        backgroundColor: colors.owed,
-        borderRadius: 14,
-        height: 52,
-      }}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
-      text1Style={{
-        fontSize: 14,
-        fontFamily: fonts.semiBold,
-        color: colors.surface,
-      }}
-      text2Style={{
-        fontSize: 12,
-        fontFamily: fonts.regular,
-        color: colors.surface,
-      }}
-    />
-  ),
-  error: (props) => (
-    <ErrorToast
-      {...props}
-      style={{
-        borderLeftColor: colors.owe,
-        backgroundColor: colors.owe,
-        borderRadius: 14,
-        height: 52,
-      }}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
-      text1Style={{
-        fontSize: 14,
-        fontFamily: fonts.semiBold,
-        color: colors.surface,
-      }}
-      text2Style={{
-        fontSize: 12,
-        fontFamily: fonts.regular,
-        color: colors.surface,
-      }}
-    />
-  ),
-};
+import { AppToast } from '../components/AppToast';
+import { colors } from '../theme';
 
 function RootNavigator() {
   const { token, isLoading } = useAuth();
@@ -136,7 +89,7 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <RootNavigator />
-      <Toast config={toastConfig} />
+      <AppToast />
     </AuthProvider>
   );
 }

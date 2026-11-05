@@ -6,12 +6,12 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-  SafeAreaView,
   TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, fonts, radius } from '../../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../../api/endpoints';
 import { useApiQuery } from '../../hooks/useApiQuery';
 import { useSubmit } from '../../hooks/useSubmit';
@@ -113,7 +113,7 @@ export default function ShoppingScreen() {
   const selectedItems = pendingItems.filter((i) => selectedIds.includes(i.id));
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       {error && error.code === 'NETWORK_ERROR' && (
         <OfflineBanner onRetry={refetch} />
       )}
@@ -191,7 +191,7 @@ export default function ShoppingScreen() {
         </View>
 
         {/* Empty State */}
-        {!loading && pendingItems.length === 0 && boughtItems.length === 0 && (
+        {!loading && !error && pendingItems.length === 0 && boughtItems.length === 0 && (
           <EmptyState
             iconName="cart-outline"
             title="Nothing on the list"

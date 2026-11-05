@@ -6,12 +6,12 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-  SafeAreaView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, fonts, radius } from '../../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../../api/endpoints';
 import { useApiQuery } from '../../hooks/useApiQuery';
 import { useSubmit } from '../../hooks/useSubmit';
@@ -24,6 +24,9 @@ import { SkeletonCard, SkeletonRow } from '../../components/Skeleton';
 import { formatPKR } from '../../utils/money';
 import { currentMonthISO, formatMonthFull } from '../../utils/dates';
 import { Expense } from '../../api/types';
+
+// Turn this on only if Smart Settle is the announced surprise task (CLAUDE.md section 5.9).
+const SHOW_SMART_SETTLE: boolean = false;
 
 export default function ExpensesScreen() {
   const router = useRouter();
@@ -46,13 +49,25 @@ export default function ExpensesScreen() {
         api.getBalances(),
         api.getExpenses(),
       ]);
-      return { balances: balancesRes.balances, expenses: expensesList };
+      return { balances: balancesRes.balances, total: balancesRes.total, expenses: expensesList };
     },
     { deps: [member?.id] }
   );
 
   const balances = expensesData?.balances || [];
   const expenses = expensesData?.expenses || [];
+  const balancesTotal = expensesData?.total ?? 0;
+
+  // List rows don't include bought items, so load the full expense when one is opened.
+  const openExpense = (exp: Expense) => {
+    setSelectedExpense(exp);
+    api
+      .getExpense(exp.id)
+      .then((full) => setSelectedExpense((current) => (current?.id === full.id ? full : current)))
+      .catch(() => {});
+  };
+
+  const deleteItemNames = expenseToDelete?.items?.map((i) => i.title).join(' and ');
 
   // Delete Expense Submit
   const { submit: submitDeleteExpense, isSubmitting: isDeleting } = useSubmit(
@@ -76,7 +91,7 @@ export default function ExpensesScreen() {
   const currentMonthLabel = formatMonthFull(currentMonthISO());
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       {error && error.code === 'NETWORK_ERROR' && (
         <OfflineBanner onRetry={refetch} />
       )}
@@ -116,7 +131,9 @@ export default function ExpensesScreen() {
             <View style={styles.balancesCard}>
               <View style={styles.balancesHeader}>
                 <Text style={styles.balancesHeading}>Balances</Text>
-                <Text style={styles.balancesTotalTag}>Total PKR 0.00 ✓</Text>
+                <Text style={styles.balancesTotalTag}>
+                  Total {formatPKR(balancesTotal)}{balancesTotal === 0 ? ' ✓' : ''}
+                </Text>
               </View>
 
               {/* Table */}
@@ -195,7 +212,7 @@ export default function ExpensesScreen() {
                   <Text style={styles.settleBtnText}>Settle up</Text>
                 </TouchableOpacity>
 
-                {/* Smart Settle (Surprise task Option 1 - ready) */}
+                {SHOW_SMART_SETTLE && (
                 <TouchableOpacity
                   activeOpacity={0.8}
                   onPress={() => router.push('/smart-settle' as any)}
@@ -204,6 +221,7 @@ export default function ExpensesScreen() {
                   <Ionicons name="sparkles" size={16} color={colors.accentText} />
                   <Text style={styles.smartSettleBtnText}>Smart Settle</Text>
                 </TouchableOpacity>
+                )}
               </View>
             </View>
 
@@ -235,7 +253,7 @@ export default function ExpensesScreen() {
                       <TouchableOpacity
                         key={exp.id}
                         activeOpacity={0.7}
-                        onPress={() => setSelectedExpense(exp)}
+                        onPress={() => openExpense(exp)}
                         style={[
                           styles.expenseRow,
                           !isLast && styles.expenseRowBorder,
@@ -318,7 +336,7 @@ export default function ExpensesScreen() {
           expenseToDelete?.source === 'checkout'
             ? `${formatPKR(
                 expenseToDelete?.amount
-              )} will be removed from everyone's balances and this month's spending. Items bought will go back to Pending.`
+              )} will be removed from everyone's balances and this month's spending. ${deleteItemNames || 'The items bought'} will go back to Pending.`
             : `${formatPKR(
                 expenseToDelete?.amount
               )} will be removed from everyone's balances and this month's spending.`

@@ -5,15 +5,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
   TextInput,
   Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import { useAuth } from '../../context/AuthContext';
 import { colors, fonts, radius } from '../../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../../api/endpoints';
 import { useApiQuery } from '../../hooks/useApiQuery';
 import { useSubmit } from '../../hooks/useSubmit';
@@ -21,7 +22,8 @@ import { Checkbox } from '../../components/Checkbox';
 import { PrimaryButton } from '../../components/PrimaryButton';
 import { DuplicateDialog, DuplicateDetails } from '../../components/DuplicateDialog';
 import { formatPKR, parseAmount, toPaisa } from '../../utils/money';
-import { formatDate, todayISO } from '../../utils/dates';
+import { OfflineBanner } from '../../components/OfflineBanner';
+import { formatDate, toLocalISODate } from '../../utils/dates';
 import { equalSplitPreview } from '../../utils/split';
 import { Category, Member } from '../../api/types';
 
@@ -56,7 +58,7 @@ export default function NewExpenseScreen() {
   const [duplicateExpense, setDuplicateExpense] = useState<DuplicateDetails | null>(null);
 
   // Fetch Members
-  const { data: membersData } = useApiQuery(api.getMembers);
+  const { data: membersData, error: membersError, refetch: refetchMembers } = useApiQuery(api.getMembers);
   const members = membersData || [];
 
   useEffect(() => {
@@ -113,7 +115,7 @@ export default function NewExpenseScreen() {
     }
   };
 
-  const formattedDateISO = date.toISOString().slice(0, 10);
+  const formattedDateISO = toLocalISODate(date);
 
   // Submit via useSubmit
   const { submit: submitExpense, isSubmitting } = useSubmit(
@@ -143,13 +145,11 @@ export default function NewExpenseScreen() {
           setDuplicateExpense(err.details.duplicate);
         } else {
           // Show error toast for other validation errors
-          import('react-native-toast-message').then(({ default: Toast }) => {
-            Toast.show({
-              type: 'error',
-              text1: err.message,
-              position: 'top',
-              visibilityTime: 4000,
-            });
+          Toast.show({
+            type: 'error',
+            text1: err.message,
+            position: 'top',
+            visibilityTime: 4000,
           });
         }
       },
@@ -217,6 +217,7 @@ export default function NewExpenseScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      {membersError && <OfflineBanner onRetry={refetchMembers} />}
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"

@@ -4,12 +4,17 @@ const MONTHS_FULL = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-export function todayISO(): string {
-  const d = new Date();
+// The date on the phone's calendar. toISOString() would give the UTC date, which is the
+// previous day in Pakistan between midnight and 5 AM.
+export function toLocalISODate(d: Date): string {
   const year = d.getFullYear();
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
+}
+
+export function todayISO(): string {
+  return toLocalISODate(new Date());
 }
 
 export function currentMonthISO(): string {
@@ -57,8 +62,9 @@ export function formatTime(isoStr: string): string {
   return `${hours}:${minutes} ${ampm}`;
 }
 
+// Takes a UTC created_at timestamp and groups it by the phone's local day.
 export function getRelativeDayLabel(dateStr: string): string {
-  const clean = dateStr.slice(0, 10);
+  const clean = toLocalISODate(new Date(dateStr));
   const today = todayISO();
 
   const dToday = new Date(today);

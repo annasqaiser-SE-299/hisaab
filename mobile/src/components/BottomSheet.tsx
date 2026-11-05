@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, fonts, radius } from '../theme';
+import { AppToast } from './AppToast';
 
 interface BottomSheetProps {
   visible: boolean;
@@ -54,6 +55,8 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
                     </View>
                     <TouchableOpacity
                       onPress={onClose}
+                      accessibilityRole="button"
+                      accessibilityLabel="Close"
                       style={styles.closeBtn}
                       hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                     >
@@ -73,6 +76,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({
           </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
+      <AppToast />
     </Modal>
   );
 };

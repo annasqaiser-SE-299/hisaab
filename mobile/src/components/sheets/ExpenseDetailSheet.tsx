@@ -6,7 +6,7 @@ import { colors, fonts, radius } from '../../theme';
 import { StatusTag } from '../StatusTag';
 import { MoneyText } from '../MoneyText';
 import { formatDate } from '../../utils/dates';
-import { formatPKR } from '../../utils/money';
+import { formatPKR, toPaisa } from '../../utils/money';
 import { Expense } from '../../api/types';
 
 interface ExpenseDetailSheetProps {
@@ -27,6 +27,19 @@ export const ExpenseDetailSheet: React.FC<ExpenseDetailSheetProps> = ({
   if (!expense) return null;
 
   const isCreator = expense.created_by === currentUserId;
+
+  // Shows the rounding working, for example:
+  // 65000 paisa ÷ 3 = 21666 each, 2 left over → +1 to Ali and Ayesha. Total PKR 650.00 ✓
+  const getPaisaNote = () => {
+    const totalLabel = `Total ${formatPKR(expense.amount)} ✓`;
+    const totalPaisa = toPaisa(expense.amount);
+    const count = expense.splits.length;
+    const base = Math.floor(totalPaisa / count);
+    const leftover = totalPaisa - base * count;
+    if (expense.split_type !== 'equal' || leftover === 0) return totalLabel;
+    const names = expense.splits.slice(0, leftover).map((s) => s.name).join(' and ');
+    return `${totalPaisa} paisa ÷ ${count} = ${base} each, ${leftover} left over → +1 to ${names}. ${totalLabel}`;
+  };
 
   return (
     <BottomSheet visible={visible} onClose={onClose}>
@@ -96,7 +109,7 @@ export const ExpenseDetailSheet: React.FC<ExpenseDetailSheetProps> = ({
             })}
           </View>
           <Text style={styles.paisaNote}>
-            Total {formatPKR(expense.amount)} ✓
+            {getPaisaNote()}
           </Text>
         </View>
 

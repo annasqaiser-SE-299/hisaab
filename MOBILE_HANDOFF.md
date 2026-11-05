@@ -51,8 +51,8 @@ Logins are `ali`, `ayesha` and `bilal`, all with password `pass1234`.
 `ipconfig getifaddr en0` (Mac), then open `http://<that-IP>:3000/api/health` in the phone's browser. You should
 see `{"ok":true}`. If not, put both on the same Wi-Fi and allow Node through the firewall on private networks.
 
-Use `http://<that-IP>:3000` as `API_BASE_URL`, never `localhost`. Set it for whichever laptop runs the backend
-at demo time.
+In Expo Go, the app uses the IP of the laptop running `npx expo start`, so there is nothing to set when the backend
+runs on that same laptop. If the backend is on another machine, set `EXPO_PUBLIC_API_URL=http://<that-IP>:3000`.
 
 If the phone can't reach the laptop on the venue Wi-Fi, the network may be blocking devices from seeing each other.
 Turn on the phone's hotspot, connect the laptop to it, and use the laptop's new IP.

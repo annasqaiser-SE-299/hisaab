@@ -6,12 +6,13 @@ import {
   StyleSheet,
   ScrollView,
   RefreshControl,
-  SafeAreaView,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, fonts, radius } from '../../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../../api/endpoints';
 import { useApiQuery } from '../../hooks/useApiQuery';
 import { ProgressBar } from '../../components/ProgressBar';
@@ -90,13 +91,17 @@ export default function HomeScreen() {
     try {
       await switchUser(username);
       refetch();
-    } catch (e) {
-      console.warn('Switch failed', e);
+    } catch (e: any) {
+      Toast.show({
+        type: 'error',
+        text1: e?.message || `Couldn't switch to ${username}.`,
+        position: 'top',
+      });
     }
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       {error && error.code === 'NETWORK_ERROR' && (
         <OfflineBanner onRetry={refetch} />
       )}
@@ -128,6 +133,8 @@ export default function HomeScreen() {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={logout}
+            accessibilityRole="button"
+            accessibilityLabel="Sign out"
             style={styles.signOutBtn}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
@@ -207,7 +214,7 @@ export default function HomeScreen() {
 
                 <View style={styles.budgetFooter}>
                   <StatusTag
-                    label={`${budget.status} · ${budget.percent_used.toFixed(0)}%`}
+                    label={`${budget.status} · ${budget.percent_used}%`}
                     variant={
                       budget.status === 'On Track'
                         ? 'onTrack'
@@ -271,7 +278,7 @@ export default function HomeScreen() {
                   You're all settled up
                 </Text>
                 <Text style={styles.balanceSubNeutral}>
-                  All debts have been paid. Total household debt is 0.00.
+                  You don't owe anyone, and nobody owes you.
                 </Text>
               </View>
             )}
@@ -331,7 +338,7 @@ export default function HomeScreen() {
                           <Text style={styles.activityItemTitle}>{act.title}</Text>
                           <Text style={styles.activityItemSub}>
                             {act.type === 'settlement'
-                              ? `${act.actor_name} paid ${act.counterparty_name}`
+                              ? 'Settlement'
                               : `${act.payer_name || act.actor_name} paid · ${
                                   act.split_type === 'custom'
                                     ? 'custom split'

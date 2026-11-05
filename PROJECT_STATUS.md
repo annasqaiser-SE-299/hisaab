@@ -2,7 +2,7 @@
 
 For anyone picking up this project, including a coding agent in any IDE. It needs no earlier chat history.
 
-**Last updated:** 2026-11-05, during phase 3. Update this file at the end of every phase.
+**Last updated:** 2026-11-05, start of phase 8. Update this file at the end of every phase.
 
 ## What this is
 
@@ -31,16 +31,16 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 |---|---|
 | 1. Backend | **Done:** all endpoints, 56 passing tests, official benchmark passes, data survives restarts, Swagger page at `/api/docs` |
 | 2. Access and device setup | **Done:** phone reaches the API over Wi-Fi, teammate has started |
-| 3. Mobile foundation (F1) | **In progress:** teammate is building it |
-| 4. Login and Home (F2, F3) | Not started |
-| 5. Shopping and checkout (F4) | Not started |
-| 6. Expenses, settle, add expense (F5, F6) | Not started |
-| 7. Activity and polish (F7, F8) | Not started |
-| 8. Testing, then tag `v1-stable` | Not started |
+| 3. Mobile foundation (F1) | **Done** |
+| 4. Login and Home (F2, F3) | **Done** |
+| 5. Shopping and checkout (F4) | **Done** |
+| 6. Expenses, settle, add expense (F5, F6) | **Done** |
+| 7. Activity and polish (F7, F8) | **Done:** reviewed and bugs fixed, but not yet confirmed on a real phone |
+| 8. Testing, then tag `v1-stable` | **Next:** type check and Android and iOS bundles pass, phone testing still to do |
 | 9. Surprise task at hour 3.5 | Not started, must wait for the announcement |
 | 10. Rehearsal and submission | Not started |
 
-**Teammate is on phase 3. Backend owner: prepare for the oral defense and support integration.** The detailed plan is below.
+**The next action is phase 8 on a real phone.** The detailed plan is below.
 
 ## Decisions that differ from what you might assume
 
@@ -50,6 +50,8 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 - **Settle Up has no sender picker.** The sender is always the logged-in member, otherwise the API returns 403.
 - **All routes except health, login and dev need a token.** Keep one ready in case a judge calls the API directly.
 - **There is no mock mode.** The mobile app uses the real API from the start.
+- **Smart Settle is hidden for now.** `app/smart-settle.tsx` exists but `SHOW_SMART_SETTLE` in `app/(tabs)/expenses.tsx` is
+  false. If it is the announced surprise task, turn that on and build `GET /api/balances/simplify`.
 - **Money is integer paisa.** `backend/src/services/money.js` is the only place it is converted.
 - **`backend/.npmrc` sets `ignore-scripts=true`.** Without it, installing `better-sqlite3` fails on machines with
   no C++ toolchain. Don't remove it.

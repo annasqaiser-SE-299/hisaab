@@ -17,7 +17,7 @@ debt settlement, monthly budget, activity feed. Built for the RC3 Mobile App Dev
 cd backend && npm install && npm run dev            # http://<LAN-IP>:3000/api/health
 curl -X POST http://localhost:3000/api/dev/reset?seed=benchmark
 
-# mobile (set API_BASE_URL in mobile/src/config.ts to http://<LAN-IP>:3000)
+# mobile (finds the backend automatically when both run on the same laptop)
 cd mobile && npm install && npx expo start          # scan QR with Expo Go
 ```
 Logins: `ali` / `ayesha` / `bilal`, password `pass1234`.

@@ -10,6 +10,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { colors, fonts, radius } from '../theme';
 import { PrimaryButton } from './PrimaryButton';
+import { AppToast } from './AppToast';
 
 interface ConfirmDialogProps {
   visible: boolean;
@@ -74,6 +75,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
+      <AppToast />
     </Modal>
   );
 };

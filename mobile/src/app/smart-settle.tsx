@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
 import { colors, fonts, radius } from '../theme';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { api } from '../api/endpoints';
 import { request } from '../api/client';
 import { useApiQuery } from '../hooks/useApiQuery';

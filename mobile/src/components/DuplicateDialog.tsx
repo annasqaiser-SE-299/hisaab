@@ -11,6 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, fonts, radius } from '../theme';
 import { PrimaryButton } from './PrimaryButton';
 import { MoneyText } from './MoneyText';
+import { AppToast } from './AppToast';
+import { formatTime } from '../utils/dates';
 
 export interface DuplicateDetails {
   id: number;
@@ -64,7 +66,7 @@ export const DuplicateDialog: React.FC<DuplicateDialogProps> = ({
                 <View style={styles.cardLeft}>
                   <Text style={styles.cardTitle}>{duplicate.title}</Text>
                   <Text style={styles.cardSub}>
-                    {duplicate.payer_name} paid
+                    {duplicate.payer_name} paid · {formatTime(duplicate.created_at)}
                   </Text>
                 </View>
                 <MoneyText amount={duplicate.amount} size={15} weight="extraBold" />
@@ -91,6 +93,7 @@ export const DuplicateDialog: React.FC<DuplicateDialogProps> = ({
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
+      <AppToast />
     </Modal>
   );
 };
