@@ -5,6 +5,7 @@ debt settlement, monthly budget, activity feed. Built for the RC3 Mobile App Dev
 
 - **Backend:** Node.js + Express + SQLite (`backend/`)
 - **Mobile:** Expo React Native + TypeScript (`mobile/`)
+- **Current progress and plan:** `PROJECT_STATUS.md`
 - **Building mobile?** Start with `MOBILE_HANDOFF.md`.
 - **Spec:** `CLAUDE.md` (read first) · `docs/BACKEND.md` · `docs/FRONTEND.md` · `docs/DEMO.md`
 - **Mockups:** open `docs/mockups/index.html` in a browser
