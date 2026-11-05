@@ -9,7 +9,8 @@
 4. Have the app logged in as **Ali** to start (he does the shopping trip).
 5. Keep a token ready in case a judge calls the API directly, because every route except health, login and dev returns 401 without one:
    `curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/json" -d "{\"username\":\"ali\",\"password\":\"pass1234\"}"`
-6. If asked why Settle Up has no sender picker: the sender is always the logged-in member, so nobody can record a payment on someone else's behalf. Tap a chip on Home to act as another member.
+6. The brief asks for an active member selector on Home. We use Switch account instead, so if asked say: "Each flatmate signs in to their own account, so nobody can act as someone else from Home."
+7. If asked why Settle Up has no sender picker: the sender is always the logged-in member, so nobody can record a payment on someone else's behalf. Use Switch account and sign in to act as another member.
 
 ## 5-minute demo script
 
@@ -23,7 +24,7 @@
 | 2:10 | Expenses → Add | Log a custom split bill, show Save disabled until remaining = 0 | |
 | 2:30 | Expenses → Add | Re-enter Water Bill 1,000 by Ali → duplicate warning | "We catch duplicates within 24 hours; you can still save if it's real." |
 | 2:50 | Expenses | Show balances table, total 0.00 ✓; open an expense detail | "Net = paid − share + sent − received. The brief prints the last two signs swapped, which contradicts its own benchmark, so we followed the benchmark. The total is always zero." |
-| 3:15 | Tap the Ayesha chip on Home | Settle Up → Ali → try more than allowed → error toast | "Over-settlements, self-payments and non-debtors are rejected by the server." |
+| 3:15 | Switch account → sign in as `ayesha` | Settle Up → Ali → try more than allowed → error toast | "Over-settlements, self-payments and non-debtors are rejected by the server." |
 | 3:40 | Settle Up | Use max → Record settlement | Balances update; spending unchanged. |
 | 4:00 | Home / Activity | Budget status unchanged by settlement; Activity shows the timeline | "Settlements move money between us; they're not household spending." |
 | 4:20 | (Surprise feature) | Demo whichever option was announced | |
@@ -45,7 +46,7 @@ Practise it twice. If something breaks live, reset with the dev endpoint and con
 - `src/api/client.ts`: one place for base URL, token, errors, NETWORK_ERROR, 401 handling.
 - `hooks/useSubmit.ts`: in-flight lock → no double taps; idempotency key reuse on network retry.
 - `hooks/useApiQuery.ts`: loading/error/data, refetch on focus.
-- `AuthContext`: SecureStore persistence, one-tap member switch.
+- `AuthContext`: SecureStore persistence, Switch account.
 - Add-expense screen: custom split "remaining to allocate" computed in paisa; duplicate dialog flow.
 
 **Both:** walk through one request end to end, e.g. tapping "Confirm checkout" → client → route → zod →

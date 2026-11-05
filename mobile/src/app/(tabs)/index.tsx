@@ -8,7 +8,6 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import Toast from 'react-native-toast-message';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import { colors, fonts, radius } from '../../theme';
@@ -26,15 +25,9 @@ import { formatPKR } from '../../utils/money';
 import { formatMonthFull } from '../../utils/dates';
 import { Activity, BalancesResponse, Budget, Expense, Item } from '../../api/types';
 
-const DEMO_MEMBERS = [
-  { id: 'M01', name: 'Ali', username: 'ali', initials: 'AL' },
-  { id: 'M02', name: 'Ayesha', username: 'ayesha', initials: 'AY' },
-  { id: 'M03', name: 'Bilal', username: 'bilal', initials: 'BI' },
-];
-
 export default function HomeScreen() {
   const router = useRouter();
-  const { member, switchUser, logout } = useAuth();
+  const { member, logout } = useAuth();
 
   const [budgetSheetVisible, setBudgetSheetVisible] = useState(false);
   const [settleSheetVisible, setSettleSheetVisible] = useState(false);
@@ -86,20 +79,6 @@ export default function HomeScreen() {
     return name.slice(0, 2).toUpperCase();
   };
 
-  const handleMemberSwitch = async (username: string) => {
-    if (member?.username.toLowerCase() === username.toLowerCase()) return;
-    try {
-      await switchUser(username);
-      refetch();
-    } catch (e: any) {
-      Toast.show({
-        type: 'error',
-        text1: e?.message || `Couldn't switch to ${username}.`,
-        position: 'top',
-      });
-    }
-  };
-
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       {error && error.code === 'NETWORK_ERROR' && (
@@ -116,7 +95,7 @@ export default function HomeScreen() {
           />
         }
       >
-        {/* Header with avatar, user, switch chips, and sign out */}
+        {/* Header with avatar, user and Switch account (mockup 02) */}
         <View style={styles.header}>
           <View style={styles.userBlock}>
             <View style={styles.avatar}>
@@ -134,42 +113,11 @@ export default function HomeScreen() {
             activeOpacity={0.7}
             onPress={logout}
             accessibilityRole="button"
-            accessibilityLabel="Sign out"
-            style={styles.signOutBtn}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            style={styles.switchAccountBtn}
           >
-            <Ionicons name="log-out-outline" size={20} color={colors.textMuted} />
+            <Ionicons name="swap-horizontal" size={16} color={colors.text} />
+            <Text style={styles.switchAccountText}>Switch account</Text>
           </TouchableOpacity>
-        </View>
-
-        {/* Member Switcher Chips */}
-        <View style={styles.switchBar}>
-          <Text style={styles.switchLabel}>Switch user:</Text>
-          <View style={styles.chipsRow}>
-            {DEMO_MEMBERS.map((m) => {
-              const isSelected = member?.username.toLowerCase() === m.username.toLowerCase();
-              return (
-                <TouchableOpacity
-                  key={m.id}
-                  activeOpacity={0.7}
-                  onPress={() => handleMemberSwitch(m.username)}
-                  style={[
-                    styles.chip,
-                    isSelected ? styles.chipSelected : styles.chipUnselected,
-                  ]}
-                >
-                  <Text
-                    style={[
-                      styles.chipText,
-                      isSelected && styles.chipTextSelected,
-                    ]}
-                  >
-                    {m.name}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
         </View>
 
         {loading && !dashboardData ? (
@@ -439,54 +387,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.text,
   },
-  signOutBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: colors.borderStrong,
-    backgroundColor: colors.surface,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  switchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingVertical: 4,
-  },
-  switchLabel: {
-    fontFamily: fonts.semiBold,
-    fontSize: 13,
-    color: colors.textMuted,
-  },
-  chipsRow: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  chip: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+  switchAccountBtn: {
+    height: 44,
+    paddingHorizontal: 14,
     borderRadius: radius.pill,
-  },
-  chipUnselected: {
     borderWidth: 1,
     borderColor: colors.borderStrong,
     backgroundColor: colors.surface,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
   },
-  chipSelected: {
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    backgroundColor: colors.accentSoft,
-  },
-  chipText: {
+  switchAccountText: {
     fontFamily: fonts.semiBold,
-    fontSize: 13,
+    fontSize: 14,
     color: colors.text,
-  },
-  chipTextSelected: {
-    fontFamily: fonts.bold,
-    color: colors.accentText,
   },
   loadingContainer: {
     gap: 16,

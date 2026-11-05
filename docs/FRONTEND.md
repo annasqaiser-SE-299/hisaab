@@ -138,8 +138,7 @@ Commit: `feat(mobile): foundation, api client, theme, components`
 ## Step F3 — Home (≈ 30 min)
 
 > Build `app/(tabs)/index.tsx` from docs/mockups/02-home.html: header with initials avatar, "Signed in as" name
-> and Ali / Ayesha / Bilal chips (tapping another member calls login with the seeded password `pass1234` and
-> swaps the token, with no login screen) plus a small Sign out button (logout → /login); budget card (GET /budget: month label, spent, budget,
+> and a Switch account button (logout → /login); budget card (GET /budget: month label, spent, budget,
 > progress bar coloured by status, status badge with percent, remaining — show "Over budget by PKR X" when
 > negative); balance card for the logged-in member from GET /balances (red "You owe", green "You are owed",
 > neutral "You're all settled up", plus who-is-owed line and a Settle up button that opens the SettleUpSheet);

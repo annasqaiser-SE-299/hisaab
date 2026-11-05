@@ -46,7 +46,10 @@ The official brief is `RC3 - Mobile app development Task (1).pdf`. It is not in 
 
 - **Net balance is `paid - share + sent - received`.** The brief prints the last two signs swapped, which
   contradicts its own benchmark. The code follows the benchmark, and the team should say so to the judges.
-- **Member switching is one tap.** Home has Ali / Ayesha / Bilal chips that sign in with the seeded password.
+- **No member chips on Home.** The team removed them so nobody can act as another member from there. Switch account
+  signs out and returns to the login screen. The brief asks for an active member selector, so explain this to the judges.
+- **The login screen is still prefilled for the demo.** It opens with `ayesha` / `pass1234`, and its chips fill both
+  username and password. `switchUser` and the `pass1234` default also remain in `AuthContext`.
 - **Settle Up has no sender picker.** The sender is always the logged-in member, otherwise the API returns 403.
 - **All routes except health, login and dev need a token.** Keep one ready in case a judge calls the API directly.
 - **There is no mock mode.** The mobile app uses the real API from the start.
@@ -97,7 +100,7 @@ Theme tokens, API client, typed endpoints, AuthContext, `useApiQuery`, `useSubmi
 **Done when:** the app opens on the phone and the tabs switch without crashing.
 
 ### Phase 4: Login and Home, F2 and F3 (45 min)
-Login screen, member chips, budget card, balance card, pending and expense counts, recent activity, budget sheet.
+Login screen, Switch account button, budget card, balance card, pending and expense counts, recent activity, budget sheet.
 
 **Done when:** as Ayesha, Home shows PKR 4,200.00 of 5,000.00, Near Limit 84%, You owe PKR 450.00, 3 pending items.
 

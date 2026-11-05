@@ -82,8 +82,8 @@ If the backend ever fails with "Cannot find module" after a pull, run `npm ci` i
 
 - **Routes live in `mobile/src/app/`.** The current Expo template uses that instead of `mobile/app/`.
 - **No mock mode.** The real API is ready, so skip `USE_MOCK` and `mock.ts`.
-- **Member switching.** Home has Ali / Ayesha / Bilal chips. Tapping one signs in as that member using `pass1234`,
-  with no login screen in between. The brief requires an active member selector, so this one earns marks.
+- **Member switching.** Home has a Switch account button that signs out and returns to the login screen. There are no
+  member chips on Home, so nobody can act as another member from there.
 - **`payer_name` on `Activity`.** Use it for "Ali paid" on Home, because the actor is whoever logged the expense,
   and that can be a different person.
 - **`created_by_name` on the duplicate warning.** Use it for "Bilal already logged" in the dialog.

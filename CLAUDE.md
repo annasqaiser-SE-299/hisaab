@@ -36,7 +36,7 @@ Phone runs the app in **Expo Go**. API base URL = laptop LAN IP (e.g. `http://19
 |---|---|
 | Household | One household, 3 seeded accounts. No sign-up screen. |
 | Auth | Username + password → JWT (7 days). Seeded logins `ali` / `ayesha` / `bilal`, password `pass1234`. |
-| Member selector | Login screen, plus Ali / Ayesha / Bilal chips on Home. Tapping a chip signs in as that member in one tap (seeded password, a demo shortcut), so the active member is always the logged-in member. |
+| Member selector | Replaced by "Signed in as X" + **Switch account** (logs out → login screen), so nobody can act as another member from Home. |
 | Ownership rules | Settle: sender must be the logged-in user. Delete expense / shopping item: only its creator. Payer of an expense or checkout can be anyone. |
 | Money | Stored as integer **paisa**. API sends/receives **rupees as numbers with ≤ 2 decimals**. |
 | Balances | All-time (debts carry across months). |
