@@ -30,7 +30,8 @@ cp docs/mobile-agent-settings.json .claude/settings.local.json
 - `.claude/settings.local.json` stops Claude Code's file tools from editing `backend/`. It only affects your
   copy and is not committed. If you use a different agent, give it the hard rule above instead.
 
-**2. Run the backend on your laptop.** Use `npm ci`, which leaves the lockfile unchanged:
+**2. Run the backend on your laptop.** You need Node 22 or newer (`node -v`). Use `npm ci`, which leaves the
+lockfile unchanged:
 
 ```bash
 cd backend

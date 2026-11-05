@@ -16,7 +16,7 @@ asking the user first — the other developer is building against them.**
 
 ## 1. Tech stack
 
-**Backend** (`backend/`): Node.js 20+, Express 4, JavaScript (CommonJS), `better-sqlite3` (DB file
+**Backend** (`backend/`): Node.js 22+, Express 4, JavaScript (CommonJS), `better-sqlite3` (DB file
 `backend/data/app.db`), `zod` (validation), `jsonwebtoken` + `bcryptjs` (auth), `cors`, `dotenv`.
 Dev: `nodemon`. Tests: built-in `node:test` + `supertest`.
 

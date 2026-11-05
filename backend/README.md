@@ -4,6 +4,8 @@ Express + SQLite REST API. The full contract is in `../CLAUDE.md`, section 5.
 
 ## Run
 
+Needs Node 22 or newer.
+
 ```bash
 npm install
 npm run dev              # restarts on change

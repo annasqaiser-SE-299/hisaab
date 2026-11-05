@@ -48,8 +48,8 @@ npm init -y
 npm i express better-sqlite3 zod jsonwebtoken bcryptjs cors dotenv
 npm i -D nodemon supertest
 ```
-If `better-sqlite3` fails to install on Windows, run `npm i better-sqlite3 --build-from-source` or upgrade to
-Node 20 LTS / 22 LTS (prebuilt binaries exist for those).
+Needs Node 22 or newer. `backend/.npmrc` turns off install scripts, so `better-sqlite3` uses its prebuilt
+binaries and no C++ toolchain is needed.
 
 ---
 
